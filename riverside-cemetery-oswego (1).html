@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riverside Cemetery of Oswego</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F8F7F4;
+      --stone-light: #EAE8E3;
+      --stone-mid: #C8C4BB;
+      --stone-dark: #7A776F;
+      --ink: #1E1D1B;
+      --ink-soft: #3D3B38;
+      --sage: #6B7C63;
+      --sage-light: #E8EDE5;
+      --accent: #4A5E42;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--stone-light);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text span:first-child {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo-text span:last-child {
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--white) !important;
+      padding: 8px 18px;
+      border-radius: 2px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--sage) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 64px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 6% 80px 8%;
+      background: var(--white);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 13px 28px;
+      border: none;
+      border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--sage); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-soft);
+      padding: 13px 28px;
+      border: 1px solid var(--stone-mid);
+      border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover { border-color: var(--sage); color: var(--sage); }
+
+    .hero-right {
+      position: relative;
+      background: var(--off-white);
+      overflow: hidden;
+    }
+
+    .hero-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: linear-gradient(160deg, var(--sage-light) 0%, var(--stone-light) 100%);
+    }
+
+    /* Decorative tree SVG in hero */
+    .hero-tree {
+      opacity: 0.18;
+    }
+
+    .hero-photo-label {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      background: rgba(255,255,255,0.75);
+      padding: 6px 12px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── INFO STRIP ── */
+    .info-strip {
+      background: var(--ink);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .info-strip-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 40px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .info-strip-item:last-child { border-right: none; }
+
+    .info-strip-icon {
+      color: var(--sage);
+      flex-shrink: 0;
+    }
+
+    .info-strip-item p {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+    }
+
+    .info-strip-item strong {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 96px 8%; }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.8;
+      max-width: 580px;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      background: linear-gradient(135deg, var(--sage-light), var(--stone-light));
+      border-radius: 2px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--stone-dark);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--stone-light);
+      margin-top: 40px;
+    }
+
+    .stat-box {
+      background: var(--white);
+      padding: 24px;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      margin-top: 4px;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--off-white);
+    }
+
+    .services-intro {
+      max-width: 560px;
+      margin-bottom: 60px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--stone-light);
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 40px 32px;
+      transition: background 0.2s;
+    }
+
+    .service-card:hover { background: var(--sage-light); }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      color: var(--sage);
+    }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .service-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.7;
+    }
+
+    /* ── HISTORY ── */
+    #history {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .timeline {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--stone-light);
+    }
+
+    .timeline-item:first-child { border-top: 1px solid var(--stone-light); }
+
+    .timeline-year {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--sage);
+      line-height: 1;
+      padding-top: 2px;
+    }
+
+    .timeline-text p {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+      margin-bottom: 2px;
+    }
+
+    .timeline-text small {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.5;
+    }
+
+    .history-image {
+      background: linear-gradient(135deg, var(--stone-light), var(--sage-light));
+      border-radius: 2px;
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--stone-dark);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 80px;
+    }
+
+    .chapel-portrait-card {
+      background: var(--off-white);
+      border: 1px solid var(--stone-light);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .chapel-portrait-frame {
+      background: linear-gradient(160deg, #f0ede8, #e8e5df);
+      aspect-ratio: 3/4;
+      max-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chapel-portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .chapel-portrait-fallback {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--stone-dark);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .chapel-portrait-caption {
+      padding: 20px 24px 24px;
+      border-top: 1px solid var(--stone-light);
+    }
+
+    .chapel-portrait-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .chapel-portrait-dates {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .chapel-portrait-role {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--sage);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .chapel-portrait-note {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.6;
+    }
+
+    .chapel-arch-note {
+      margin-top: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--sage-light);
+      border-radius: 2px;
+    }
+
+    .chapel-arch-note p {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--sage);
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      background: var(--ink);
+      padding: 96px 8%;
+    }
+
+    #gallery .section-eyebrow { color: var(--sage); }
+
+    #gallery .section-title { color: var(--white); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 3px;
+      margin-top: 40px;
+    }
+
+    .gallery-cell {
+      background: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--stone-dark);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      overflow: hidden;
+    }
+
+    .gallery-cell:hover { background: #2e2d2a; }
+
+    .gallery-cell.tall { grid-row: span 2; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--off-white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 56px;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 32px; }
+
+    .contact-detail {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .contact-detail-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--white);
+      border: 1px solid var(--stone-light);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--sage);
+    }
+
+    .contact-detail-text strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 4px;
+    }
+
+    .contact-detail-text p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.6;
+    }
+
+    .contact-detail-text a {
+      color: var(--stone-dark);
+      text-decoration: none;
+    }
+
+    .contact-detail-text a:hover { color: var(--accent); }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--white);
+      border: 1px solid var(--stone-light);
+      border-radius: 2px;
+      padding: 12px 14px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--sage);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      align-self: flex-start;
+    }
+
+    /* ── MAP PLACEHOLDER ── */
+    .map-placeholder {
+      background: var(--stone-light);
+      height: 200px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--stone-dark);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 24px;
+    }
+
+    /* ── HOURS ── */
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid var(--stone-light);
+    }
+
+    .hours-table td {
+      padding: 10px 0;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+    }
+
+    .hours-table td:first-child {
+      font-weight: 400;
+      color: var(--ink-soft);
+      width: 140px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--white);
+      padding: 56px 8% 32px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-col a {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── CHAPEL ── */
+    #chapel {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .chapel-image {
+      background: linear-gradient(150deg, var(--stone-light) 0%, var(--sage-light) 100%);
+      border-radius: 2px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--stone-dark);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .chapel-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 36px;
+      border-top: 1px solid var(--stone-light);
+    }
+
+    .chapel-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--stone-light);
+    }
+
+    .chapel-feature-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .chapel-feature p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.6;
+    }
+
+    .chapel-feature p strong {
+      display: block;
+      font-weight: 500;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      #about, #history, #chapel, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .info-strip { flex-direction: column; }
+      .info-strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 64px 5%; }
+      .services-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17.5" stroke="#4A5E42" stroke-width="1"/>
+      <path d="M18 28V16" stroke="#4A5E42" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M18 22 C18 22 14 20 12 16 C14.5 17 17 17 18 16 C19 17 21.5 17 24 16 C22 20 18 22 18 22Z" fill="#4A5E42" opacity="0.7"/>
+      <path d="M18 19 C18 19 15 17 13 14 C15 15 17 15 18 14 C19 15 21 15 23 14 C21 17 18 19 18 19Z" fill="#4A5E42"/>
+    </svg>
+    <span class="nav-logo-text">
+      <span>Riverside Cemetery</span>
+      <span>of Oswego · Est. 1852</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#chapel">Chapel</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Oswego, New York · Since 1852</p>
+    <h1 class="hero-title">A place of<br><em>lasting peace</em><br>and remembrance.</h1>
+    <p class="hero-subtitle">Riverside Cemetery has served the families of Oswego for over 170 years — a quiet, well-kept ground where loved ones are honored with dignity and care.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Our Services</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-placeholder">
+      <svg class="hero-tree" width="220" height="300" viewBox="0 0 220 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M110 280V120" stroke="#4A5E42" stroke-width="8" stroke-linecap="round"/>
+        <path d="M110 200 C110 200 60 175 40 130 C70 145 95 145 110 130 C125 145 150 145 180 130 C160 175 110 200 110 200Z" fill="#4A5E42"/>
+        <path d="M110 155 C110 155 68 134 50 95 C76 108 98 108 110 95 C122 108 144 108 170 95 C152 134 110 155 110 155Z" fill="#6B7C63"/>
+        <path d="M110 115 C110 115 76 96 62 62 C84 74 101 74 110 62 C119 74 136 74 158 62 C144 96 110 115 110 115Z" fill="#4A5E42"/>
+      </svg>
+      <span style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone-dark);margin-top:12px;">Photo coming soon</span>
+    </div>
+    <div class="hero-photo-label">Riverside Cemetery · Oswego, NY</div>
+  </div>
+</section>
+
+<!-- ── INFO STRIP ── -->
+<div class="info-strip">
+  <div class="info-strip-item">
+    <svg class="info-strip-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <div>
+      <strong>Office Hours</strong>
+      <p>Mon–Fri 8am–4:30pm · Sat & Sun by appt</p>
+    </div>
+  </div>
+  <div class="info-strip-item">
+    <svg class="info-strip-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.75a16 16 0 006.29 6.29l1.13-1.12a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    <div>
+      <strong>Phone</strong>
+      <p>(315) 343-0357</p>
+    </div>
+  </div>
+  <div class="info-strip-item">
+    <svg class="info-strip-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <div>
+      <strong>Location</strong>
+      <p>4024 County Route 57, Oswego, NY 13126</p>
+    </div>
+  </div>
+  <div class="info-strip-item">
+    <svg class="info-strip-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    <div>
+      <strong>Email</strong>
+      <p>info@riversidecemeteryoswego.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div>
+    <div class="about-image">
+      <svg width="60" height="72" viewBox="0 0 60 72" fill="none" opacity="0.35">
+        <rect x="20" y="0" width="20" height="28" rx="10" stroke="#4A5E42" stroke-width="1.5"/>
+        <line x1="30" y1="28" x2="30" y2="68" stroke="#4A5E42" stroke-width="1.5"/>
+        <line x1="14" y1="50" x2="46" y2="50" stroke="#4A5E42" stroke-width="1.5"/>
+      </svg>
+      <span>Cemetery Photo</span>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-number">170+</div>
+        <div class="stat-label">Years Serving Oswego</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">40+</div>
+        <div class="stat-label">Acres of Grounds</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">1852</div>
+        <div class="stat-label">Year Established</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Grounds Access</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p class="section-eyebrow">About Us</p>
+    <h2 class="section-title">Dignity, care, and<br>a home for memories.</h2>
+    <p class="section-body" style="margin-bottom:20px;">Riverside Cemetery of Oswego has been a trusted steward of our community's history since 1852. Nestled in the heart of Oswego County, our grounds offer families a serene and beautifully maintained resting place for those they love.</p>
+    <p class="section-body" style="margin-bottom:20px;">We are a nonprofit corporation dedicated to the perpetual care of our grounds and the families we serve. Our staff brings compassion and professionalism to every interaction — because we understand that arranging a burial is one of the most significant moments a family will face.</p>
+    <p class="section-body">Whether you are planning ahead, navigating a recent loss, or visiting a loved one, we are here to help.</p>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="services-intro">
+    <p class="section-eyebrow">What We Offer</p>
+    <h2 class="section-title">Services for every family's needs.</h2>
+    <p class="section-body">From traditional burial to pre-planning, we offer a full range of services with transparent pricing and personal attention.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="8" y="10" width="24" height="22" rx="2"/>
+        <path d="M8 16h24"/>
+        <path d="M20 10V6"/>
+        <path d="M16 6h8"/>
+      </svg>
+      <div class="service-name">Traditional Burial</div>
+      <p class="service-desc">Full-service ground burial with a range of lot options, including single and family plots in well-maintained sections throughout our grounds.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="20" cy="20" r="12"/>
+        <path d="M20 14v6l4 2"/>
+      </svg>
+      <div class="service-name">Pre-Need Planning</div>
+      <p class="service-desc">Arrange and pay for burial services in advance — relieving your family of difficult decisions during an already difficult time.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M10 32 C10 24 14 18 20 14 C26 18 30 24 30 32"/>
+        <path d="M20 14V8"/>
+        <path d="M16 10h8"/>
+      </svg>
+      <div class="service-name">Cremation Interment</div>
+      <p class="service-desc">Dignified options for the interment of cremated remains, including dedicated garden sections and memorial markers.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="10" y="16" width="20" height="16" rx="1"/>
+        <path d="M10 22h20"/>
+        <path d="M14 16V12 M26 16V12"/>
+        <path d="M14 12 C14 8 26 8 26 12"/>
+      </svg>
+      <div class="service-name">Private Mausoleum</div>
+      <p class="service-desc">Families may purchase a standalone private mausoleum for placement on their lot. Our staff can guide you through available options and placement requirements.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M20 6 C14 12 8 18 8 24 a12 12 0 0024 0 C32 18 26 12 20 6Z"/>
+        <path d="M20 24 V32"/>
+        <path d="M14 30 C16 26 24 26 26 30"/>
+      </svg>
+      <div class="service-name">Green Burial</div>
+      <p class="service-desc">An environmentally conscious option that forgoes embalming and traditional vaults, allowing for a natural return to the earth in a peaceful, maintained setting.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="12" y="8" width="16" height="24" rx="1"/>
+        <path d="M16 14h8M16 18h8M16 22h5"/>
+      </svg>
+      <div class="service-name">Deed & Records</div>
+      <p class="service-desc">We maintain thorough records of all lots and interments. Our office can assist with deed transfers, duplicate records, and lot locating.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M8 34 C8 26 12 20 20 16 C28 20 32 26 32 34"/>
+        <circle cx="20" cy="12" r="4"/>
+      </svg>
+      <div class="service-name">Monument Placement</div>
+      <p class="service-desc">We coordinate with monument dealers for the installation of grave markers and memorial stones, following our perpetual care standards.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M6 34 C6 26 10 20 20 16 C30 20 34 26 34 34"/>
+        <path d="M14 26 C14 22 17 20 20 20 C23 20 26 22 26 26"/>
+      </svg>
+      <div class="service-name">Perpetual Care</div>
+      <p class="service-desc">Our grounds are maintained year-round. Perpetual care fees ensure ongoing mowing, landscaping, and upkeep of the entire cemetery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CHAPEL ── -->
+<section id="chapel" style="background:var(--white);padding:96px 8%;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    <div>
+      <p class="section-eyebrow">Page Memorial Chapel</p>
+      <h2 class="section-title">A peaceful space for<br><em>gathering & farewell.</em></h2>
+      <p class="section-body" style="margin-bottom:20px;">Riverside Cemetery is proud to offer the Page Memorial Chapel — a serene, non-denominational space available to families for funeral services, memorial gatherings, and graveside ceremonies.</p>
+      <p class="section-body" style="margin-bottom:20px;">The chapel provides a dignified, comfortable setting on our grounds, allowing families to hold services in close proximity to the burial site. Whether you are planning a traditional funeral service or a simple gathering of loved ones, the Page Memorial Chapel is available to meet your needs.</p>
+      <p class="section-body" style="margin-bottom:36px;">To inquire about chapel availability or to schedule a visit, please contact our office directly.</p>
+      <a href="#contact" class="btn-primary">Inquire About the Chapel</a>
+    </div>
+    <div>
+      <div style="background:linear-gradient(145deg,var(--stone-light),var(--sage-light));border-radius:2px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--stone-dark);">
+        <svg width="72" height="80" viewBox="0 0 72 80" fill="none" opacity="0.35">
+          <rect x="8" y="36" width="56" height="40" rx="1" stroke="#4A5E42" stroke-width="1.5"/>
+          <path d="M8 44h56" stroke="#4A5E42" stroke-width="1.5"/>
+          <path d="M4 36 L36 8 L68 36" stroke="#4A5E42" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="28" y="56" width="16" height="20" rx="1" stroke="#4A5E42" stroke-width="1.2"/>
+          <rect x="14" y="48" width="12" height="10" rx="1" stroke="#4A5E42" stroke-width="1.2"/>
+          <rect x="46" y="48" width="12" height="10" rx="1" stroke="#4A5E42" stroke-width="1.2"/>
+          <line x1="36" y1="8" x2="36" y2="2" stroke="#4A5E42" stroke-width="1.5"/>
+          <line x1="33" y1="5" x2="39" y2="5" stroke="#4A5E42" stroke-width="1.5"/>
+        </svg>
+        <span style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Chapel Photo</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--stone-light);margin-top:2px;">
+        <div style="background:var(--off-white);padding:20px 22px;">
+          <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Setting</div>
+          <div style="font-size:0.9rem;font-weight:300;color:var(--ink-soft);">Non-denominational</div>
+        </div>
+        <div style="background:var(--off-white);padding:20px 22px;">
+          <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Location</div>
+          <div style="font-size:0.9rem;font-weight:300;color:var(--ink-soft);">On cemetery grounds</div>
+        </div>
+        <div style="background:var(--off-white);padding:20px 22px;">
+          <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Use</div>
+          <div style="font-size:0.9rem;font-weight:300;color:var(--ink-soft);">Funeral &amp; memorial services</div>
+        </div>
+        <div style="background:var(--off-white);padding:20px 22px;">
+          <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Booking</div>
+          <div style="font-size:0.9rem;font-weight:300;color:var(--ink-soft);">By appointment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HISTORY ── -->
+<section id="history">
+  <div>
+    <p class="section-eyebrow">Our History</p>
+    <h2 class="section-title">Over 170 years<br>of community care.</h2>
+    <p class="section-body">Riverside Cemetery has been woven into the fabric of Oswego since before the Civil War. We are proud to be a steward of this community's history and the families who built it.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">1852</div>
+        <div class="timeline-text">
+          <p>Cemetery Founded</p>
+          <small>Riverside Cemetery of Oswego is established, providing a dedicated burial ground for the growing City of Oswego.</small>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1860s</div>
+        <div class="timeline-text">
+          <p>Civil War Era</p>
+          <small>Riverside becomes the final resting place for many Oswego soldiers who served in the Union Army during the Civil War.</small>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1920s</div>
+        <div class="timeline-text">
+          <p>Expansion of Grounds</p>
+          <small>Growth in Oswego's population leads to significant expansion of the cemetery grounds and addition of new sections.</small>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1970s</div>
+        <div class="timeline-text">
+          <p>Incorporated as Nonprofit</p>
+          <small>Riverside Cemetery is formally incorporated as a nonprofit organization, ensuring its perpetual care mission is protected.</small>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Today</div>
+        <div class="timeline-text">
+          <p>Serving Oswego Families</p>
+          <small>Still family-focused and community-rooted, we continue to provide dignified services and maintain our historic grounds.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="history-image">
+      <svg width="60" height="80" viewBox="0 0 60 80" fill="none" opacity="0.3">
+        <rect x="0" y="50" width="60" height="2" fill="#4A5E42"/>
+        <rect x="22" y="20" width="16" height="30" fill="#4A5E42"/>
+        <path d="M30 0 L52 20 H8Z" fill="#4A5E42"/>
+        <rect x="24" y="38" width="12" height="12" fill="#F8F7F4"/>
+        <rect x="27" y="38" width="6" height="1" fill="#4A5E42"/>
+      </svg>
+      <span>Historic Photo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CHAPEL ── -->
+<section id="chapel">
+  <div>
+    <p class="section-eyebrow">On Our Grounds · Est. 1907</p>
+    <h2 class="section-title">Page Memorial Chapel</h2>
+    <p class="section-body">The Page Memorial Chapel was donated by the Page family of Oswego in memory of <em style="font-family:var(--font-display);font-style:italic;">Alanson Sumner Page (1825–1905)</em> and his wife, Elsie Benson Page. Mr. Page was a prominent businessman, civic leader, and four-term mayor of Oswego. Since its completion in 1907, the chapel has been the centerpiece of our cemetery and an important part of the community.</p>
+
+    <p class="section-body" style="margin-top:16px;">The building is a fine example of stone Gothic architecture. Its squat bell tower and rough-hewn, heavy buttressed walls are offset by intricate tracery in the panel and rose windows — creating an imposing yet graceful effect.</p>
+
+    <div class="chapel-features">
+      <div class="chapel-feature">
+        <div class="chapel-feature-dot"></div>
+        <p><strong>Funeral &amp; Memorial Services</strong>The chapel is used frequently for funeral services and memorials, providing families with a dignified and convenient on-site gathering space.</p>
+      </div>
+      <div class="chapel-feature">
+        <div class="chapel-feature-dot"></div>
+        <p><strong>Weddings</strong>The chapel is also available for weddings, offering a unique and historic stone Gothic setting on the tranquil grounds of Riverside Cemetery.</p>
+      </div>
+      <div class="chapel-feature">
+        <div class="chapel-feature-dot"></div>
+        <p><strong>Stone Gothic Architecture</strong>Built in 1907, the chapel's buttressed stone walls, bell tower, and rose windows make it one of the most distinctive historic structures in Oswego County.</p>
+      </div>
+      <div class="chapel-feature">
+        <div class="chapel-feature-dot"></div>
+        <p><strong>Inquire About Availability</strong>Contact our office to learn more about scheduling the chapel for a funeral, memorial, or wedding.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <a href="#contact" class="btn-primary">Ask About the Chapel</a>
+    </div>
+  </div>
+  <div>
+    <!-- Portrait & caption card -->
+    <div class="chapel-portrait-card">
+      <div class="chapel-portrait-frame">
+        <img src="data:image/jpeg;base64,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" alt="Portrait of Alanson Sumner Page, Mayor of Oswego" class="chapel-portrait-img" />
+        <div class="chapel-portrait-fallback">
+          <svg width="56" height="70" viewBox="0 0 56 70" fill="none" opacity="0.25">
+            <ellipse cx="28" cy="24" rx="16" ry="20" stroke="#4A5E42" stroke-width="1.5"/>
+            <path d="M4 66 C4 50 14 42 28 40 C42 42 52 50 52 66" stroke="#4A5E42" stroke-width="1.5"/>
+          </svg>
+          <span>Portrait of<br>Alanson Sumner Page</span>
+        </div>
+      </div>
+      <div class="chapel-portrait-caption">
+        <p class="chapel-portrait-name">Alanson Sumner Page</p>
+        <p class="chapel-portrait-dates">1825 – 1905</p>
+        <p class="chapel-portrait-role">Businessman · Civic Leader<br>Four-Term Mayor of Oswego</p>
+        <p class="chapel-portrait-note">The chapel was donated in his memory by the Page family and completed in 1907.</p>
+      </div>
+    </div>
+
+    <!-- Architecture placeholder -->
+    <div class="chapel-arch-note">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--sage);flex-shrink:0;"><path d="M3 21h18M3 18h18M5 18V9l7-6 7 6v9"/><path d="M9 21v-6h6v6"/></svg>
+      <p>Stone Gothic Architecture · Bell Tower · Rose Windows · Buttressed Walls</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <p class="section-eyebrow">Gallery</p>
+  <h2 class="section-title" style="color:var(--white);">Our grounds &amp; memorials.</h2>
+  <div class="gallery-grid">
+    <div class="gallery-cell tall">
+      <svg width="32" height="40" viewBox="0 0 32 40" fill="none" opacity="0.3"><rect x="8" y="0" width="16" height="32" rx="8" stroke="white" stroke-width="1.5"/><line x1="16" y1="32" x2="16" y2="40" stroke="white" stroke-width="1.5"/></svg>
+      <span>Cemetery Entrance</span>
+    </div>
+    <div class="gallery-cell">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" opacity="0.3"><circle cx="14" cy="14" r="13" stroke="white" stroke-width="1.5"/><path d="M14 20V10 M10 14l4-4 4 4" stroke="white" stroke-width="1.5"/></svg>
+      <span>Garden Section</span>
+    </div>
+    <div class="gallery-cell">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" opacity="0.3"><path d="M4 24 C4 16 8 10 14 6 C20 10 24 16 24 24" stroke="white" stroke-width="1.5"/><path d="M14 6V2 M11 3h6" stroke="white" stroke-width="1.5"/></svg>
+      <span>Woodland Path</span>
+    </div>
+    <div class="gallery-cell tall">
+      <svg width="32" height="40" viewBox="0 0 32 40" fill="none" opacity="0.3"><rect x="6" y="12" width="20" height="24" rx="1" stroke="white" stroke-width="1.5"/><path d="M6 18h20 M16 12V8 M12 8h8" stroke="white" stroke-width="1.5"/></svg>
+      <span>Memorial Stones</span>
+    </div>
+    <div class="gallery-cell">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" opacity="0.3"><rect x="3" y="3" width="22" height="22" rx="2" stroke="white" stroke-width="1.5"/><path d="M3 10h22 M10 3v7" stroke="white" stroke-width="1.5"/></svg>
+      <span>Office Building</span>
+    </div>
+    <div class="gallery-cell">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" opacity="0.3"><path d="M4 20 C4 12 8 6 14 4 C20 6 24 12 24 20" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M2 20h24" stroke="white" stroke-width="1.5"/></svg>
+      <span>Historic Section</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <p class="section-eyebrow">Contact & Hours</p>
+  <h2 class="section-title">We're here to help.</h2>
+  <p class="section-body">Whether you're arranging services, researching family records, or just have a question — our staff is ready to assist with care and respect.</p>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-detail">
+        <div class="contact-detail-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <strong>Address</strong>
+          <p>4024 County Route 57<br>Oswego, NY 13126</p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.75a16 16 0 006.29 6.29l1.13-1.12a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <strong>Phone</strong>
+          <p><a href="tel:3153430357">(315) 343-0357</a></p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <strong>Email</strong>
+          <p><a href="mailto:superintendent@riversideofoswego.com">superintendent@riversideofoswego.com</a></p>
+        </div>
+      </div>
+      <div>
+        <strong style="display:block;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;">Office Hours</strong>
+        <table class="hours-table">
+          <tr><td>Monday – Friday</td><td>8:00 am – 4:30 pm</td></tr>
+          <tr><td>Saturday</td><td>By appointment</td></tr>
+          <tr><td>Sunday</td><td>By appointment</td></tr>
+          <tr><td>Grounds</td><td>Open daily, dawn to dusk</td></tr>
+        </table>
+      </div>
+      <div class="map-placeholder">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Map placeholder — embed Google Maps here</span>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <p style="font-size:0.85rem;font-weight:300;color:var(--stone-dark);margin-bottom:8px;">Send us a message and we'll get back to you promptly.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone (optional)</label>
+        <input type="tel" placeholder="(315) 000-0000" />
+      </div>
+      <div class="form-group">
+        <label>How can we help?</label>
+        <select>
+          <option value="">Select a topic…</option>
+          <option>Burial Services</option>
+          <option>Pre-Need Planning</option>
+          <option>Page Memorial Chapel</option>
+          <option>Private Mausoleum</option>
+          <option>Green Burial</option>
+          <option>Cremation Interment</option>
+          <option>Lot Purchase or Transfer</option>
+          <option>Monument Placement</option>
+          <option>Records Request</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Please share any details that would help us assist you…"></textarea>
+      </div>
+      <button class="btn-primary form-submit" type="button">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="17.5" stroke="#6B7C63" stroke-width="1"/>
+          <path d="M18 28V16" stroke="#6B7C63" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M18 22 C18 22 14 20 12 16 C14.5 17 17 17 18 16 C19 17 21.5 17 24 16 C22 20 18 22 18 22Z" fill="#6B7C63" opacity="0.7"/>
+          <path d="M18 19 C18 19 15 17 13 14 C15 15 17 15 18 14 C19 15 21 15 23 14 C21 17 18 19 18 19Z" fill="#6B7C63"/>
+        </svg>
+        <span style="font-family:var(--font-display);font-size:1rem;font-weight:400;color:white;letter-spacing:0.02em;">Riverside Cemetery of Oswego</span>
+      </div>
+      <p>Serving the families of Oswego County with dignity, compassion, and perpetual care since 1852.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#chapel">Page Memorial Chapel</a></li>
+        <li><a href="#history">Our History</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Traditional Burial</a></li>
+        <li><a href="#services">Pre-Need Planning</a></li>
+        <li><a href="#chapel">Page Memorial Chapel</a></li>
+        <li><a href="#services">Cremation Interment</a></li>
+        <li><a href="#services">Private Mausoleum</a></li>
+        <li><a href="#services">Green Burial</a></li>
+        <li><a href="#services">Monument Placement</a></li>
+        <li><a href="#services">Perpetual Care</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:3153430357">(315) 343-0357</a></li>
+        <li><a href="mailto:superintendent@riversideofoswego.com">Email Us</a></li>
+        <li><a href="#contact">4024 County Route 57, Oswego NY</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Riverside Cemetery of Oswego, Inc. All rights reserved.</p>
+    <p>A nonprofit corporation · Oswego, New York</p>
+  </div>
+</footer>
+
+</body>
+</html>
